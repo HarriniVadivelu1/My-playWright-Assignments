@@ -1,0 +1,20 @@
+import test, { expect } from "@playwright/test"
+test("Assertions", async({page})=>{
+
+    await page.goto('https://www.decathlon.in/')
+    await expect(page.getByText('Sign In')).toBeVisible()
+    await page.locator('[type="search"]').fill('Shoes')
+    await page.getByText('For Men').click()
+    await expect(page.locator('//div[@data-test-id="category-products-grid"]')).toBeVisible()
+    await page.locator('//button[@aria-controls="sport_pratice_en"]').click()
+    await page.locator('//label[@data-test-id="filter-item-sport_pratice_en-Running"]').click()
+    await page.locator('//span[@data-test-id="title:Gender"]').click()
+    await page.locator('//label[@data-test-id="filter-item-gender_id_en-MEN"]').click()
+    await page.locator('//button[@aria-controls="indian_size"]').click()
+    await page.locator('//label[@data-test-id="filter-item-indian_size-UK 10.5 - EU 45"]').click()
+    await page.locator('[data-test-id="product-card-product-card:mrp"]').nth(0).click()
+    await page.locator('[data-test-id="pdp-size-option-text-6"]').click()
+    await page.locator('[data-test-id="pdp:add-to-cart-button"]').click()
+    await page.locator('[data-test-id="header-desktop:cart-icon"]').click()
+    await expect(page.getByText('JOGFLOW 190.1 Run Men')).toBeVisible()
+})
